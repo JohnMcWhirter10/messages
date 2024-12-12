@@ -39,7 +39,7 @@ gem 'mysql2', '0.5.6'
 
 gem 'carrierwave', '~> 2.0'
 gem 'mini_magick', '~> 4.11'
-gem 'rmagick', '~> 4.0'
+gem 'rmagick', '~> 6.0'
 gem 'json'
 gem 'aws-sdk-s3', '~> 1.114'
 
