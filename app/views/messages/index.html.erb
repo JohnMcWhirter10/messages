@@ -1,0 +1,69 @@
+<h1 class="messages-heading">Messages</h1>
+
+<!-- Filter Section -->
+<div class="messages-filter">
+  <% Tag.all.each do |tag| %>
+    <button class="filter-button" data-tag="<%= tag.name %>"><%= tag.name %></button>
+  <% end %>
+  <button class="filter-button reset-filter" data-tag="all">Show All</button>
+</div>
+
+<!-- Messages Grid -->
+<div class="messages-grid" id="messages-container">
+  <% @messages.each do |message| %>
+    <div class="message-card" data-tags="<%= message.tags.map(&:name).join(',') %>">
+      <% if message.thumbnail_file.attached? %>
+        <div class="thumbnail" style="background-image: url('<%= url_for(message.thumbnail_file) %>');"></div>
+      <% else %>
+        <div class="thumbnail no-thumbnail">No Thumbnail</div>
+      <% end %>
+
+      <div class="message-content">
+        <h3 class="message-title"><%= link_to message.title, message_path(message) %></h3>
+        <p class="message-description"><%= message.description %></p>
+
+        <% if message.tags.any? %>
+          <div class="message-tags">
+            <strong>Tags:</strong>
+            <ul class="tags-list">
+              <% message.tags.each do |tag| %>
+                <li class="tag-item"><%= tag.name %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% else %>
+          <p class="no-tags">No Tags</p>
+        <% end %>
+
+        <div class="message-links">
+          <%= link_to 'Edit', edit_message_path(message), class: "edit-link" %>
+          <%= button_to 'Delete', message_path(message), method: :delete, data: { confirm: "Are you sure?" }, class: "delete-btn" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  // JavaScript for Tag Filtering
+  document.addEventListener("DOMContentLoaded", function () {
+    const filterButtons = document.querySelectorAll(".filter-button");
+    const messages = document.querySelectorAll(".message-card");
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const selectedTag = button.getAttribute("data-tag");
+
+        messages.forEach(message => {
+          const messageTags = message.getAttribute("data-tags").split(',');
+
+          if (selectedTag === "all" || messageTags.includes(selectedTag)) {
+            message.style.display = "block";
+          } else {
+            message.style.display = "none";
+          }
+        });
+      });
+    });
+  });
+</script>

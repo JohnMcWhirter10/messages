@@ -1,0 +1,140 @@
+<style>
+  /* Message Title */
+.message-title h2 {
+  font-size: 2.5rem;
+  color: #1e3a8a;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Tags Section */
+.message-tags h3 {
+  font-size: 1.6rem;
+  color: #1976d2;
+  margin-bottom: 10px;
+}
+
+.message-tags ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 15px;
+}
+
+.message-tags .tag {
+  background-color: #e0f7fa;
+  color: #00796b;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Video Section */
+.message-video {
+  max-width: 1440px;
+  max-height: 1080px;
+  margin: 30px 0;
+  text-align: center;
+}
+
+.video-player {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Message Description */
+.message-description p {
+  font-size: 1.2rem;
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* Actions Section */
+.message-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+}
+
+.message-actions a {
+  padding: 10px 20px;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.edit-link {
+  background-color: #1976d2;
+  color: white;
+  border: 2px solid #1976d2;
+}
+
+.edit-link:hover {
+  background-color: #1565c0;
+}
+
+.back-link {
+  background-color: transparent;
+  color: #1976d2;
+  border: 2px solid #1976d2;
+}
+
+.back-link:hover {
+  background-color: #e3f2fd;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .message-title h2 {
+    font-size: 2rem;
+  }
+
+  .message-description p {
+    font-size: 1.1rem;
+  }
+
+  .message-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+  </style>
+
+  <!-- Message Title -->
+  <div class="message-title">
+    <h2><%= @message.title %></h2>
+  </div>
+
+  <!-- Tags -->
+  <% if @message.tags.any? %>
+    <div class="message-tags">
+      <ul>
+        <% @message.tags.each do |tag| %>
+          <li class="tag"><%= tag.name %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Attached Video with Thumbnail Poster -->
+  <% if @message.video_file.attached? %>
+    <div class="message-video">
+      <%= video_tag url_for(@message.video_file), controls: true, poster: @message.thumbnail_file.attached? ? url_for(@message.thumbnail_file) : nil, class: "video-player" %>
+    </div>
+  <% end %>
+  <!-- Message Description -->
+  <div class="message-description">
+    <p><%= @message.description %></p>
+  </div>
+  <!-- Actions -->
+  <div class="message-actions">
+    <%= link_to "Edit Message", edit_message_path(@message), class: "edit-link" %>
+    <%= link_to "Back to Messages", messages_path, class: "back-link" %>
+  </div>
