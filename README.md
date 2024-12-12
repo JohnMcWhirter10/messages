@@ -14,8 +14,3 @@
    `rails server`
 2. Open your browser and navigate to:  
    `http://localhost:3000`
-
-## Running the Tests (Optional)
-
-1. Run the test suite:  
-   `rails test`
