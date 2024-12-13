@@ -12,6 +12,11 @@ default: &default
 
 development:
   <<: *default
+  encoding: utf8
+  username: your_user
+  password: your_password
+  host: localhost
+  database: watermark_dev
 
 test:
   <<: *default
