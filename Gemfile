@@ -41,7 +41,7 @@ gem 'carrierwave', '~> 2.0'
 gem 'mini_magick', '~> 4.11'
 gem 'rmagick', '~> 4.0'
 gem 'json'
-gem 'aws-sdk-s3', '~> 1.114'
+gem 'aws-sdk-s3', '~> 1.177'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
