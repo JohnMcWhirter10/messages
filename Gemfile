@@ -37,7 +37,7 @@ gem "bootsnap", require: false
 # use mysql2
 gem 'mysql2', '0.5.6'
 
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 3.1'
 gem 'mini_magick', '~> 4.11'
 gem 'rmagick', '~> 4.0'
 gem 'json'
